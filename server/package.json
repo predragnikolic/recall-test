@@ -4,6 +4,9 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc -p .",
+    "db:generate": "drizzle-kit migrate",
+    "db:migrate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
     "start": "node ./dist/index.js"
   },
   "dependencies": {
