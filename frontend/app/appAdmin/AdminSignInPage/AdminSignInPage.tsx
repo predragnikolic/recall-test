@@ -1,5 +1,4 @@
 import { Button, Card, Input } from "@nextui-org/react";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { z } from "zod";
