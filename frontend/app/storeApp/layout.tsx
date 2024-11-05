@@ -29,15 +29,6 @@ export default function Layout({loaderData}: Route.ComponentProps) {
   }
 
    const signIn = async () => {
-    try {
-       await authClient.signIn.email({
-          email: 'idmpepe@gmail.com',
-          password: "password123",
-        })
-       revalidator.revalidate()
-    } catch (e) {
-      console.error(e)
-    }
   }
 
   const signOut = async () => {
