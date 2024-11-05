@@ -13,7 +13,10 @@ const app = new Hono()
 		"*",
 		cors({
 			origin: ["http://localhost:5173"], // @TODO change this in prod
+			allowHeaders: ['Content-Type', 'Authorization'],
+			maxAge: 600,
 			credentials: true,
+			exposeHeaders: ["Content-Length"],
 		}),
 	)
 	.route("/", publicRouter)

@@ -1,9 +1,9 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import type { LinksFunction } from "react-router";
 import {NextUIProvider} from "@nextui-org/react";
-
-import "./app.css";
 import { ToastContainer } from "./components/ToastContainer/ToastContainer";
+import { ProvideReactQuery } from "./utils/ProvideTenstackQuery";
+import "./app.css";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -29,10 +29,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <NextUIProvider>
+        <ProvideReactQuery>
           <ToastContainer />
           {children}
           <ScrollRestoration />
           <Scripts />
+          </ProvideReactQuery>
         </NextUIProvider>
       </body>
     </html>
