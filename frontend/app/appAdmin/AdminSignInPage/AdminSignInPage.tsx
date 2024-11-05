@@ -1,9 +1,17 @@
 import { Button, Card, Input } from "@nextui-org/react";
-import { useNavigate } from "react-router";
+import { redirect, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { authClient } from "~/utils/auth/authClient";
 import { useZodForm } from "~/utils/useZodForm";
+import type * as Route from "./+types.AdminSignInPage";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const session =  await authClient.getSession({}, {
+    headers: request.headers
+  })
+  if (session.data) return redirect('/admin')
+}
 
 export default function SignInPage() {
     const navigate = useNavigate();

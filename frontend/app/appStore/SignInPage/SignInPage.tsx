@@ -6,6 +6,7 @@ import { z } from "zod";
 import { authClient } from "~/utils/auth/authClient";
 import { classNames } from "~/utils/classNames";
 import { useZodForm } from "~/utils/useZodForm";
+import AutoAnimateHeight from "react-auto-animate-height";
 
 export default function SignInPage() {
 	const [tab, setTab] = useState<"SIGN_IN" | "SIGN_UP">("SIGN_IN");
@@ -29,7 +30,7 @@ export default function SignInPage() {
 			password: formData.password,
 		});
 		if (error) {
-			toast.error(error.message)
+			toast.error(error.message);
 			return;
 		}
 		navigate("/");
@@ -61,7 +62,7 @@ export default function SignInPage() {
 			password: formData.password,
 		});
 		if (error) {
-			toast.error(error.message)
+			toast.error(error.message);
 			return;
 		}
 		navigate("/");
@@ -99,78 +100,80 @@ export default function SignInPage() {
 						</Button>
 					</div>
 
-					{tab === "SIGN_IN" && (
-						<form className="contents" onSubmit={signIn}>
-							<Input
-								{...signInRegister("email")}
-								isInvalid={Boolean(signInFormState.errors.email?.message)}
-								errorMessage={signInFormState.errors.email?.message}
-								variant="underlined"
-								label="Email"
-							/>
-							<Input
-								{...signInRegister("password")}
-								isInvalid={Boolean(signInFormState.errors.password?.message)}
-								errorMessage={signInFormState.errors.password?.message}
-								variant="underlined"
-								label="Password"
-								type="password"
-							/>
+					<AutoAnimateHeight ease="ease-in-out">
+						{tab === "SIGN_IN" && (
+							<form className="contents" onSubmit={signIn}>
+								<Input
+									{...signInRegister("email")}
+									isInvalid={Boolean(signInFormState.errors.email?.message)}
+									errorMessage={signInFormState.errors.email?.message}
+									variant="underlined"
+									label="Email"
+								/>
+								<Input
+									{...signInRegister("password")}
+									isInvalid={Boolean(signInFormState.errors.password?.message)}
+									errorMessage={signInFormState.errors.password?.message}
+									variant="underlined"
+									label="Password"
+									type="password"
+								/>
 
-							<Button
-								type="submit"
-								color="primary"
-								className="uppercase font-bold nice-font tracking-widest"
-							>
-								Sign in
-							</Button>
-						</form>
-					)}
+								<Button
+									type="submit"
+									color="primary"
+									className="uppercase font-bold nice-font mt-6 w-full tracking-widest"
+								>
+									Sign in
+								</Button>
+							</form>
+						)}
 
-					{tab === "SIGN_UP" && (
-						<form className="contents" onSubmit={signUp}>
-							<Input
-								{...signUpRegister("name")}
-								isInvalid={Boolean(signUnFormState.errors.name?.message)}
-								errorMessage={signUnFormState.errors.name?.message}
-								variant="underlined"
-								label="Name"
-							/>
-							<Input
-								{...signUpRegister("email")}
-								isInvalid={Boolean(signUnFormState.errors.email?.message)}
-								errorMessage={signUnFormState.errors.email?.message}
-								variant="underlined"
-								label="Email"
-							/>
-							<Input
-								{...signUpRegister("password")}
-								isInvalid={Boolean(signUnFormState.errors.password?.message)}
-								errorMessage={signUnFormState.errors.password?.message}
-								variant="underlined"
-								label="Password"
-								type="password"
-							/>
-							<Input
-								{...signUpRegister("confirmPassword")}
-								isInvalid={Boolean(
-									signUnFormState.errors.confirmPassword?.message,
-								)}
-								errorMessage={signUnFormState.errors.confirmPassword?.message}
-								variant="underlined"
-								label="Confirm Password"
-								type="password"
-							/>
+						{tab === "SIGN_UP" && (
+							<form className="contents" onSubmit={signUp}>
+								<Input
+									{...signUpRegister("name")}
+									isInvalid={Boolean(signUnFormState.errors.name?.message)}
+									errorMessage={signUnFormState.errors.name?.message}
+									variant="underlined"
+									label="Name"
+								/>
+								<Input
+									{...signUpRegister("email")}
+									isInvalid={Boolean(signUnFormState.errors.email?.message)}
+									errorMessage={signUnFormState.errors.email?.message}
+									variant="underlined"
+									label="Email"
+								/>
+								<Input
+									{...signUpRegister("password")}
+									isInvalid={Boolean(signUnFormState.errors.password?.message)}
+									errorMessage={signUnFormState.errors.password?.message}
+									variant="underlined"
+									label="Password"
+									type="password"
+								/>
+								<Input
+									{...signUpRegister("confirmPassword")}
+									isInvalid={Boolean(
+										signUnFormState.errors.confirmPassword?.message,
+									)}
+									errorMessage={signUnFormState.errors.confirmPassword?.message}
+									variant="underlined"
+									label="Confirm Password"
+									type="password"
+								/>
 
-							<Button
-								type="submit"
-								color="primary"
-								className="uppercase font-bold nice-font tracking-widest"
-							>
-								Sign up
-							</Button>
-						</form>
-					)}
+								<Button
+									type="submit"
+									color="primary"
+									className="uppercase font-bold nice-font mt-6 w-full tracking-widest"
+								>
+									Sign up
+								</Button>
+							</form>
+						)}
+					</AutoAnimateHeight>
 				</Card>
 			</div>
 		</div>

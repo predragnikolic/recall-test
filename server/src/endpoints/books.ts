@@ -2,7 +2,7 @@ import { z } from "zod";
 import { createAuthRouter, onlyRoles } from "./auth.js";
 import { zValidator } from "@hono/zod-validator";
 import { db } from "../db/index.js";
-import { asc, eq, ilike } from "drizzle-orm";
+import { desc, eq, ilike } from "drizzle-orm";
 import { bookTable, bookSchema, insertBookSchema } from "../db/schema/bookTable.js";
 import { validate } from "../utils/validate.js";
 
@@ -28,7 +28,7 @@ booksRouter.get(
 		const [books, totalCount] = await Promise.all([
 			db.query.bookTable.findMany({
 				where: whereOptions,
-				orderBy: [asc(bookTable.title)],
+				orderBy: [desc(bookTable.createdAt)],
 				offset: queryParams.offset,
 				limit: queryParams.limit,
 			}),
