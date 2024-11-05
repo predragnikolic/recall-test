@@ -1,5 +1,5 @@
 import { Button, Input, Pagination, Tabs } from "@nextui-org/react"
-import { useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { AnimatePresence, motion } from "framer-motion"
 import { Search } from "lucide-react"
 import { DataNotFound } from "~/components/DataNotFound/DataNotFound"
@@ -19,7 +19,7 @@ export default function AdminBooksPage() {
     })
   const debouncedSearch = useDebounce(search)
 
-  const {data, status, error} = useQuery({
+  const {data, status} = useQuery({
     queryKey: ['getBooks', offset, limit, debouncedSearch],
     queryFn: async () => {
       const res = await honoClient.api.books.$get({
@@ -30,7 +30,8 @@ export default function AdminBooksPage() {
         }
       })
       return res.json()
-    }
+    },
+    placeholderData: keepPreviousData
   })
   
   return (
@@ -55,8 +56,8 @@ export default function AdminBooksPage() {
 
       {status === "error" && <SomethingBadHappen />}
       {status === "success" && (
-        <div className="container mx-auto p-4">
-        <AnimatePresence mode="popLayout">
+        <div className="container mx-auto p-3 pt-8">
+        <div>
             {showCreateForm && (
               <motion.div
                 key={"new_product"}
@@ -75,7 +76,7 @@ export default function AdminBooksPage() {
               </motion.div>
             )}
               {data.items.map(book => <BookFormItem key={book.id} book={book} />)}
-          </AnimatePresence>
+          </div>
           <DataNotFound totalPageCount={data.totalCount} pageItemsCount={data.items.length} />
 
           <footer className="flex justify-center mt-4">

@@ -31,7 +31,7 @@ export function BookStatusPopover({ value, onChange }: Props) {
   return (
     <Popover placement="bottom" offset={10}>
       <PopoverTrigger>
-        <Button size="sm" variant="flat" className="uppercase text-[11px]" color={selectedStatus.color}>
+        <Button size="sm" variant="flat" className="uppercase text-[11px] w-[130px]" color={selectedStatus.color}>
           <Tooltip content="Book Status">{selectedStatus.label}</Tooltip>
         </Button>
       </PopoverTrigger>

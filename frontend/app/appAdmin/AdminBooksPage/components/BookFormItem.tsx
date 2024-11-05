@@ -26,8 +26,8 @@ export function BookFormItem({
 	book?: Book;
 	isExpanded?: boolean;
 	className?: string;
-	onReset: () => void;
-	onSave: () => void;
+	onReset?: () => void;
+	onSave?: () => void;
 }) {
 	const queryClient = useQueryClient();
 	const [showMore, setShowMore] = useState(isExpanded);
@@ -62,17 +62,17 @@ export function BookFormItem({
 						description: formData.description,
 					},
 				});
-        if (!res.ok) throw res
+				if (!res.ok) throw res;
 			} else {
-        const res = await honoClient.api.books.$post({
-          json: {
-            title: formData.title,
-            price: formData.price * 100,
-            status: formData.status,
-            description: formData.description,
-          },
-        });
-        if (!res.ok) throw res
+				const res = await honoClient.api.books.$post({
+					json: {
+						title: formData.title,
+						price: formData.price * 100,
+						status: formData.status,
+						description: formData.description,
+					},
+				});
+				if (!res.ok) throw res;
 			}
 			reset(formData);
 			toast(`Book "${formData.title}" saved.`);
@@ -86,17 +86,13 @@ export function BookFormItem({
 	});
 	return (
 		<form onSubmit={save} className={className}>
-			<AutoAnimateHeight
-				ease="ease-in-out"
-				className="shadow-small z-10"
-			>
+			<AutoAnimateHeight ease="ease-in-out" className="shadow-small z-10">
 				<Card
 					className={classNames(
-						"p-4 overflow-x-auto shadow-none product-list-grid content-center gap-3 w-full rounded-none transition-all duration-700",
+						"p-4 bg-[#222]/20 overflow-x-auto shadow-none product-list-grid content-center gap-3 w-full rounded-none transition-all duration-700",
 						showMore && "rounded-br-lg rounded-bl-lg",
 					)}
 				>
-
 					{/* col1*/}
 					<div className="grow flex items-center">
 						<Controller
@@ -134,11 +130,7 @@ export function BookFormItem({
 									onBlur={onBlur}
 									onChange={onChange}
 									placeholder="Price"
-                  startContent={
-                    <p className="whitespace-nowrap self-end">
-                      $
-                    </p>
-                  }
+									startContent={<p className="whitespace-nowrap self-end">$</p>}
 									endContent={
 										<p className="whitespace-nowrap self-end text-[11px]">
 											.00 {/*TODO don't hard code decimals*/}
@@ -165,10 +157,19 @@ export function BookFormItem({
 							)}
 						/>
 
-                        <Button variant="light" isIconOnly onClick={() => setShowMore(!showMore)}>
-              <ChevronLeft className={classNames("transition-all", showMore && "-rotate-90")} strokeWidth={0.5} />
-            </Button>
-
+						<Button
+							variant="light"
+							isIconOnly
+							onPress={() => setShowMore(!showMore)}
+						>
+							<ChevronLeft
+								className={classNames(
+									"transition-all",
+									showMore && "-rotate-90",
+								)}
+								strokeWidth={0.5}
+							/>
+						</Button>
 					</div>
 
 					{(formState.isDirty || formType === "create") && (
@@ -178,10 +179,10 @@ export function BookFormItem({
 								color="primary"
 								variant="light"
 								className="uppercase"
-								onClick={() => {
+								onPress={() => {
 									reset();
 									onReset?.();
-                  setShowMore(false)
+									setShowMore(false);
 								}}
 							>
 								Dismiss
@@ -224,7 +225,7 @@ export function BookFormItem({
 										<Textarea
 											placeholder="Write book description"
 											value={value}
-                      onChange={onChange}
+											onChange={onChange}
 											onBlur={onChange}
 										/>
 									)}
