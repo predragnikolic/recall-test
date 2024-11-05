@@ -20,10 +20,6 @@ export default function Layout({loaderData}: Route.ComponentProps) {
           email: 'idmpepe@gmail.com',
           password: "password123",
           name: 'Predrag Nikolic',
-
-          // crap (on 2 places, look for the same comment) 
-          // this is ignored by the "better-auth" because `input: false // don't allow user to set role`` was set on the Backend
-          role: 'thisDoesNotMatter'  // TypeScript complains here, TODO see if there is a better way to address this,
         })
        revalidator.revalidate()
     } catch (e) {
