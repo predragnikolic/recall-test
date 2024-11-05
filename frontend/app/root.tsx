@@ -3,6 +3,7 @@ import type { LinksFunction } from "react-router";
 import {NextUIProvider} from "@nextui-org/react";
 
 import "./app.css";
+import { ToastContainer } from "./components/ToastContainer/ToastContainer";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -28,6 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <NextUIProvider>
+          <ToastContainer />
           {children}
           <ScrollRestoration />
           <Scripts />

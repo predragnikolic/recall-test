@@ -1,6 +1,7 @@
-import { Button, Card, Divider, Input } from "@nextui-org/react";
+import { Button, Card, Input } from "@nextui-org/react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import { authClient } from "~/utils/auth/authClient";
 import { classNames } from "~/utils/classNames";
@@ -23,16 +24,15 @@ export default function SignInPage() {
 	});
 
 	const signIn = handleSignIn(async (formData) => {
-		try {
-			await authClient.signIn.email({
-				email: formData.email,
-				password: formData.password,
-			});
-			navigate("/");
-		} catch (e) {
-			console.error(e);
-			// TODO add toast
+		const { error } = await authClient.signIn.email({
+			email: formData.email,
+			password: formData.password,
+		});
+		if (error) {
+			toast.error(error.message)
+			return;
 		}
+		navigate("/");
 	});
 
 	const signUpSchema = z
@@ -55,17 +55,16 @@ export default function SignInPage() {
 	});
 
 	const signUp = handleSignUp(async (formData) => {
-		try {
-			await authClient.signUp.email({
-				name: formData.name,
-				email: formData.email,
-				password: formData.password,
-			});
-      navigate("/");
-		} catch (e) {
-			console.error(e);
-			// TODO add toast
+		const { error } = await authClient.signUp.email({
+			name: formData.name,
+			email: formData.email,
+			password: formData.password,
+		});
+		if (error) {
+			toast.error(error.message)
+			return;
 		}
+		navigate("/");
 	});
 
 	const inactiveTabClasses = "opacity-60 scale-80";
