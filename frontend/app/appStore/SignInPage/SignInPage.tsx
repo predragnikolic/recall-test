@@ -59,6 +59,10 @@ export default function SignInPage() {
 			name: formData.name,
 			email: formData.email,
 			password: formData.password,
+
+			// crap (on 2 places, look for the same comment) 
+			// this is ignored by the "better-auth" because `input: false // don't allow user to set role`` was set on the Backend
+			role: 'thisDoesNotMatter'  // TypeScript complains here, TODO see if there is a better way to address this,
 		});
 		if (error) {
 			toast.error(error.message)

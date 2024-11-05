@@ -8,7 +8,7 @@ export const routes: RouteConfig = [
   ]),
 
   ...prefix("admin", [
-      index("./appAdmin/home.tsx"),
+      index("./appAdmin/AdminHomePage/AdminHomePage.tsx"),
       route("/sign-in", "./appAdmin/AdminSignInPage/AdminSignInPage.tsx"),
   ]),
 ];

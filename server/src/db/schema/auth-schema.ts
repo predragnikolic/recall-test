@@ -1,38 +1,44 @@
-import { pgTable, text, integer, timestamp, boolean } from "drizzle-orm/pg-core";
-			
+import {pgTable, text, timestamp, boolean, } from "drizzle-orm/pg-core";
+import type { Role } from "../../utils/roles.js";
+
 export const user = pgTable("user", {
-					id: text("id").primaryKey(),
-					name: text('name').notNull(),
- email: text('email').notNull().unique(),
- emailVerified: boolean('emailVerified').notNull(),
- image: text('image'),
- createdAt: timestamp('createdAt').notNull(),
- updatedAt: timestamp('updatedAt').notNull()
-				});
+	id: text().primaryKey(),
+	name: text().notNull(),
+	email: text().notNull().unique(),
+	emailVerified: boolean().notNull(),
+	image: text(),
+	createdAt: timestamp().notNull(),
+	updatedAt: timestamp().notNull(),
+	role: text().notNull().default('user' satisfies Role),
+});
 
 export const session = pgTable("session", {
-					id: text("id").primaryKey(),
-					expiresAt: timestamp('expiresAt').notNull(),
- ipAddress: text('ipAddress'),
- userAgent: text('userAgent'),
- userId: text('userId').notNull().references(()=> user.id)
-				});
+	id: text().primaryKey(),
+	expiresAt: timestamp().notNull(),
+	ipAddress: text(),
+	userAgent: text(),
+	userId: text()
+		.notNull()
+		.references(() => user.id),
+});
 
 export const account = pgTable("account", {
-					id: text("id").primaryKey(),
-					accountId: text('accountId').notNull(),
- providerId: text('providerId').notNull(),
- userId: text('userId').notNull().references(()=> user.id),
- accessToken: text('accessToken'),
- refreshToken: text('refreshToken'),
- idToken: text('idToken'),
- expiresAt: timestamp('expiresAt'),
- password: text('password')
-				});
+	id: text().primaryKey(),
+	accountId: text().notNull(),
+	providerId: text().notNull(),
+	userId: text()
+		.notNull()
+		.references(() => user.id),
+	accessToken: text(),
+	refreshToken: text(),
+	idToken: text(),
+	expiresAt: timestamp(),
+	password: text(),
+});
 
 export const verification = pgTable("verification", {
-					id: text("id").primaryKey(),
-					identifier: text('identifier').notNull(),
- value: text('value').notNull(),
- expiresAt: timestamp('expiresAt').notNull()
-				});
+	id: text().primaryKey(),
+	identifier: text().notNull(),
+	value: text().notNull(),
+	expiresAt: timestamp().notNull(),
+});

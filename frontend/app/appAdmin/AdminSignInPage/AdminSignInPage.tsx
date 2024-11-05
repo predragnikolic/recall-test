@@ -22,13 +22,18 @@ export default function SignInPage() {
     });
 
     const signIn = handleSubmit(async (formData) => {
-        const { error } = await authClient.signIn.email({
+        const { data, error } = await authClient.signIn.email({
             email: formData.email,
             password: formData.password,
         });
         if (error) {
             toast.error(error.message)
             return;
+        }
+        if (data.user.role !== 'admin') {
+            await authClient.signOut() // @DANGER! - find a better way to handle regulars users being able to sign in to admin (:
+            toast.error("Incorrect credentials")
+            return
         }
         navigate("/admin");
     });

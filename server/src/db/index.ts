@@ -7,5 +7,6 @@ const schema = {
 } as const
 
 export const db = drizzle(process.env.DATABASE_URL!, {
-    schema
+    schema,
+    casing: "snake_case",
 });
