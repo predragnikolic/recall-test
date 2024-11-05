@@ -9,6 +9,7 @@ import {
 	insertBookSchema,
 } from "../db/schema/bookTable.js";
 import { validate } from "../utils/validate.js";
+import { createSearchArray, ILikeAnyArray } from "../utils/iLikeAnyArray.js";
 
 export const booksRouter = createAuthRouter()
 	.get(
@@ -26,7 +27,7 @@ export const booksRouter = createAuthRouter()
 		async (c) => {
 			const queryParams = c.req.valid("query");
 			const whereOptions = queryParams.search
-				? ilike(bookTable.title, queryParams.search)
+				? ilike(bookTable.title, createSearchArray(queryParams.search).join(' '))
 				: undefined;
 
 			const [books, totalCount] = await Promise.all([
