@@ -11,6 +11,8 @@ export const routes: RouteConfig = [
       route("/sign-in", "./appAdmin/AdminSignInPage/AdminSignInPage.tsx"),
       layout("./appAdmin/dashboardLayout.tsx", [
         index("./appAdmin/AdminHomePage/AdminHomePage.tsx"),
+        route("/dashboard/orders", "./appAdmin/OrdersPage/OrdersPage.tsx"),
+        route("/dashboard/books", "./appAdmin/AdminBooksPage/AdminBooksPage.tsx"),
       ])
   ]),
 ];

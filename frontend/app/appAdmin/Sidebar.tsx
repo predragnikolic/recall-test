@@ -7,12 +7,10 @@ import type { ReactNode } from "react"
 
 type Props = {
   className?: string
+  user: typeof authClient.$Infer.Session.user
 }
-export function Sidebar({ className, ...props }: Props) {
+export function Sidebar({ className, user, ...props }: Props) {
   const navigate = useNavigate()
-  const {data} = authClient.useSession()
-  if (!data) return<></>
-  const user = data.user
   return (
     <div {...props} className={classNames(className, "flex flex-col backdrop-blur")}>
       {/*upper section*/}
@@ -84,8 +82,8 @@ function SidebarItem({ children, icon, ...navLinkProps }: SidebarItemProps) {
         className={({ isActive }) =>
           classNames(
             "w-full justify-start flex items-center gap-2 p-2 font-light",
-            "rounded-md hover:bg-black/10 transition-colors",
-            isActive && "bg-black/10",
+            "rounded-md hover:bg-white/10 transition-colors",
+            isActive && "bg-white/10",
           )
         }
       >

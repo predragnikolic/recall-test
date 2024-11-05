@@ -9,6 +9,7 @@
 
 .dark .app-grid {
   background: linear-gradient(to top,#222, #111);
+  color: #eee;
 }
 
 .app-grid_main {
