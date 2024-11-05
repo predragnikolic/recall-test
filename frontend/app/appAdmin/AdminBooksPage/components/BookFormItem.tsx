@@ -102,7 +102,7 @@ export function BookFormItem({
 								<Input
 									size="lg"
 									placeholder="Book title"
-									className="place-self-center"
+									className="place-self-center less-nice-font"
 									variant="flat"
 									value={value}
 									onBlur={onBlur}
@@ -126,20 +126,21 @@ export function BookFormItem({
 								<Input
 									size="sm"
 									variant="flat"
+									className="less-nice-font"
 									value={String(value)}
 									onBlur={onBlur}
 									onChange={onChange}
 									placeholder="Price"
 									startContent={<p className="whitespace-nowrap self-end">$</p>}
 									endContent={
-										<p className="whitespace-nowrap self-end text-[11px]">
+										<p className="whitespace-nowrap self-end  less-nice-font">
 											.00 {/*TODO don't hard code decimals*/}
 										</p>
 									}
 									isInvalid={Boolean(formState.errors.price)}
 									classNames={{
 										inputWrapper:
-											"bg-transparent shadow-none py-1 w-[13ch] mb-1",
+											"bg-transparent shadow-none py-1 w-[10ch]",
 										input: "text-right",
 									}}
 								/>
