@@ -31,3 +31,9 @@ body {
     }
 }
 
+
+.product-list-grid {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 130px auto auto;
+    grid-template-areas: 'product_title product_price product_status product_actions';
+}

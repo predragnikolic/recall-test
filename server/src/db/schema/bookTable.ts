@@ -22,4 +22,6 @@ export const insertBookSchema = createInsertSchema(bookTable, {
 }).omit({
     id: true
 })
-export const bookSchema = createSelectSchema(bookTable)
+export const bookSchema = createSelectSchema(bookTable,{
+    status: z.enum(BOOK_STATUSES)
+})

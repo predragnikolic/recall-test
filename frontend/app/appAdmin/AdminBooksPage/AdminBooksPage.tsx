@@ -8,10 +8,11 @@ import { TopBar } from "~/components/TopBar/TopBar"
 import { honoClient } from "~/utils/honoRpc"
 import { useDebounce } from "~/utils/useDebounce"
 import { usePagination } from "~/utils/usePagination"
-import { useQueryParam } from "~/utils/useQueryParams"
+import { useBooleanQueryParam, useQueryParam } from "~/utils/useQueryParams"
 import { BookFormItem } from "./components/BookFormItem"
 
 export default function AdminBooksPage() {
+  const [showCreateForm, setShowCreateForm] = useBooleanQueryParam("showCreateForm")
   const [search, setSearch] = useQueryParam("search")
     const { currentPage, getTotalPages, limit, offset, setPage } = usePagination({
       limit: 12,
@@ -46,7 +47,7 @@ export default function AdminBooksPage() {
           />
         }
         rightContent={
-            <Button color="primary" className="uppercase ml-auto" > 
+            <Button color="primary" className="uppercase ml-auto" onClick={() => setShowCreateForm(true)}> 
               Add book
             </Button>
         }
@@ -55,7 +56,24 @@ export default function AdminBooksPage() {
       {status === "error" && <SomethingBadHappen />}
       {status === "success" && (
         <div className="container p-4">
-          <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="popLayout">
+            {showCreateForm && (
+              <motion.div
+                key={"new_product"}
+                layout
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ type: "tween" }}
+              >
+                <BookFormItem
+                  isExpanded
+                  className="mb-3"
+                  onReset={() => setShowCreateForm(false)}
+                  onSave={() => setShowCreateForm(false)}
+                />
+              </motion.div>
+            )}
               {data.items.map(book => <BookFormItem key={book.id} book={book} />)}
           </AnimatePresence>
           <DataNotFound totalPageCount={data.totalCount} pageItemsCount={data.items.length} />

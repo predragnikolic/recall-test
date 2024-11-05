@@ -102,5 +102,9 @@ export const booksRouter = createAuthRouter()
 			const { id } = c.req.valid("param");
 			const input = c.req.valid("json");
 			await db.update(bookTable).set(input).where(eq(bookTable.id, id));
+			const responseSchema = z.object({
+				id: z.string()
+			});
+			return c.json(validate(responseSchema, { id }));
 		},
 	);
