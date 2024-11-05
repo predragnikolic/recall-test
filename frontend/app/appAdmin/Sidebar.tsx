@@ -15,12 +15,11 @@ export function Sidebar({ className, user, ...props }: Props) {
     <div {...props} className={classNames(className, "flex flex-col backdrop-blur")}>
       {/*upper section*/}
       <div className="grow">
-        <section className="mb-6 flex relative">
-          <div className="bg-[#fff] opacity-70 h-full w-full inset absolute" />
+        <section className="mb-6 flex relative h-[200px]">
+          <div className="bg-[#fff] opacity-90 h-full w-full inset absolute" />
           <div className="h-full w-full inset absolute flex justify-center items-center">
-            <p className="text-6xl tracking-widest font-bold nice-font text-black text-center">BooK<br />store</p>
+            <p className="text-6xl tracking-widest font-bold nice-font text-black text-center">Book<br />store</p>
           </div>
-          <img src="/favicon.webp" />
         </section>
 
        <p className="px-6 opacity-60 uppercase text-xs">Store</p>

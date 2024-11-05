@@ -224,6 +224,10 @@ export function BookFormItem({
 									render={({ field: { onChange, value } }) => (
 										<Textarea
 											placeholder="Write book description"
+											className="less-nice-font"
+											classNames={{
+												input: 'leading-6'
+											}}
 											value={value}
 											onChange={onChange}
 											onBlur={onChange}
