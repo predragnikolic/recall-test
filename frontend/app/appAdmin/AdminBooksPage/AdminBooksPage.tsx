@@ -55,7 +55,7 @@ export default function AdminBooksPage() {
 
       {status === "error" && <SomethingBadHappen />}
       {status === "success" && (
-        <div className="container p-4">
+        <div className="container mx-auto p-4">
         <AnimatePresence mode="popLayout">
             {showCreateForm && (
               <motion.div

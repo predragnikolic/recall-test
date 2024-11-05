@@ -3,7 +3,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { z } from "zod";
 
 const BOOK_STATUSES = ['available', 'hidden'] as const
-type BookStatus = typeof BOOK_STATUSES[number]
+export type BookStatus = typeof BOOK_STATUSES[number]
 
 export const bookTable = pgTable("book", {
     id: uuid().primaryKey().defaultRandom(),
@@ -12,7 +12,7 @@ export const bookTable = pgTable("book", {
         .defaultNow()
         .$onUpdate(() => new Date()),
     title: text().notNull(),
-    price: integer().notNull(),
+    price: integer().notNull(), // $100.50 is stored like 10050 (in cents)
     description: text().notNull(),
     status: text().notNull().$type<BookStatus>().default('available'),
 });
@@ -22,6 +22,7 @@ export const insertBookSchema = createInsertSchema(bookTable, {
 }).omit({
     id: true
 })
+export type InsertBook = z.infer<typeof insertBookSchema>
 export const bookSchema = createSelectSchema(bookTable,{
     status: z.enum(BOOK_STATUSES)
 })

@@ -16,7 +16,7 @@ export function TopBar({ rightContent, leftContent, centerContent, className = "
     <section className={classNames("sticky top-0 z-30 transparent backdrop-blur", className)}>
       <header
         className={classNames(
-          "container flex items-center gap-4",
+          "container mx-auto flex items-center gap-4",
           Boolean(rightContent || centerContent || leftContent) && "h-[70px] px-4 pt-4",
         )}
       >

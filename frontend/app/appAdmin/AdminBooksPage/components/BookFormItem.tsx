@@ -37,7 +37,7 @@ export function BookFormItem({
 		defaultValues: {
 			id: book?.id ?? window.crypto.randomUUID(),
 			title: book?.title ?? "",
-			price: book?.price ?? 0,
+			price: book ? book.price / 100 : 0,
 			status: book?.status ?? "available",
 			description: book?.description ?? "",
 		},
@@ -57,7 +57,7 @@ export function BookFormItem({
 					param: { id: formData.id },
 					json: {
 						title: formData.title,
-						price: formData.price,
+						price: formData.price * 100,
 						status: formData.status,
 						description: formData.description,
 					},
@@ -67,7 +67,7 @@ export function BookFormItem({
         const res = await honoClient.api.books.$post({
           json: {
             title: formData.title,
-            price: formData.price,
+            price: formData.price * 100,
             status: formData.status,
             description: formData.description,
           },
@@ -141,7 +141,7 @@ export function BookFormItem({
                   }
 									endContent={
 										<p className="whitespace-nowrap self-end text-[11px]">
-											.00 
+											.00 {/*TODO don't hard code decimals*/}
 										</p>
 									}
 									isInvalid={Boolean(formState.errors.price)}
