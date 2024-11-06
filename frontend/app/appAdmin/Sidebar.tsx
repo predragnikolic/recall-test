@@ -28,11 +28,11 @@ export function Sidebar({ className, user, ...props }: Props) {
 
         <p className="px-6 opacity-60 uppercase text-xs">Store</p>
         <section className="px-3 mb-6 flex flex-col gap-1 mt-1">
-          <SidebarItem end to="/admin/dashboard/orders" icon={<Package strokeWidth={1} />}>
-            Orders
-          </SidebarItem>
           <SidebarItem end to="/admin/dashboard/books" icon={<Book strokeWidth={1} />}>
             Books
+          </SidebarItem>
+          <SidebarItem end to="/admin/dashboard/orders" icon={<Package strokeWidth={1} />}>
+            Orders
           </SidebarItem>
         </section>
       </div>

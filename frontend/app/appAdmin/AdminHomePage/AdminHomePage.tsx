@@ -13,5 +13,9 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function AdminHomePage() {
-  return <div>AdminHomePage</div>
+  return (
+    <div className="h-full flex justify-center items-center">
+      <p className="nice-font text-6xl">Welcome</p>
+    </div>
+  )
 }
