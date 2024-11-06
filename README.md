@@ -20,5 +20,5 @@ Store - http://localhost:5173/
 Admin - http://localhost:5173/admin
 
 > [!NOTE]
-> For the admin app you need to have a user with admin role. First create a regular user http://localhost:5173/sign-in, than in the server folder run `db:unsafe:make-all-users-admins`
+> For the admin app you **need to have a user with admin role**. First create a regular user http://localhost:5173/sign-in, than in the server folder run `db:unsafe:make-all-users-admins` to make all users Admins. This was done to make the reviewer access the Admin Dashboard.
 
