@@ -13,7 +13,7 @@ const app = new Hono()
 		"*",
 		cors({
 			origin: ["http://localhost:5173"], // @TODO change this in prod
-			allowHeaders: ['Content-Type', 'Authorization'],
+			allowHeaders: ["Content-Type", "Authorization"],
 			maxAge: 600,
 			credentials: true,
 			exposeHeaders: ["Content-Length"],
@@ -37,5 +37,6 @@ serve({
 	fetch: app.fetch,
 	port,
 });
+// eslint-disable-next-line no-console
 console.log(`Server is running on http://localhost:${port}`);
 export type AppType = typeof app;

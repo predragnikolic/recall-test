@@ -1,0 +1,29 @@
+rc: ~/.lefthookrc
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx eslint {staged_files} --no-warn-ignored
+      # run: TIMING=1 npx eslint {staged_files} # debug if eslint is slow
+    format:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx biome format --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files} && git update-index --again
+    check-dependency-version-consistency:
+      glob: "*.{json}"
+      run: npx check-dependency-version-consistency .
+    check-dependency-pined-versions:
+      glob: "*.{json}"
+      run: npx npmPkgJsonLint .
+
+
+pre-push:
+  parallel: true
+  commands:
+    type check front:
+      run: cd frontend && npx tsc --noEmit
+    type check server:
+      run: cd server && npx tsc --noEmit
+
+

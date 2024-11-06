@@ -9,7 +9,7 @@ import {
 	insertBookSchema,
 } from "../db/schema/bookTable.js";
 import { validate } from "../utils/validate.js";
-import { createSearchArray, ILikeAnyArray } from "../utils/iLikeAnyArray.js";
+import { createSearchArray } from "../utils/iLikeAnyArray.js";
 
 export const booksRouter = createAuthRouter()
 	.get(
@@ -27,7 +27,10 @@ export const booksRouter = createAuthRouter()
 		async (c) => {
 			const queryParams = c.req.valid("query");
 			const whereOptions = queryParams.search
-				? ilike(bookTable.title, createSearchArray(queryParams.search).join(' '))
+				? ilike(
+						bookTable.title,
+						createSearchArray(queryParams.search).join(" "),
+					)
 				: undefined;
 
 			const [books, totalCount] = await Promise.all([
@@ -81,9 +84,9 @@ export const booksRouter = createAuthRouter()
 		zValidator("json", insertBookSchema),
 		async (c) => {
 			const input = c.req.valid("json");
-			const [book] =await db.insert(bookTable).values(input).returning();
+			const [book] = await db.insert(bookTable).values(input).returning();
 			const responseSchema = z.object({
-				id: z.string()
+				id: z.string(),
 			});
 			return c.json(validate(responseSchema, { id: book.id }));
 		},
@@ -104,7 +107,7 @@ export const booksRouter = createAuthRouter()
 			const input = c.req.valid("json");
 			await db.update(bookTable).set(input).where(eq(bookTable.id, id));
 			const responseSchema = z.object({
-				id: z.string()
+				id: z.string(),
 			});
 			return c.json(validate(responseSchema, { id }));
 		},

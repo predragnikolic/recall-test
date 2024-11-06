@@ -1,8 +1,4 @@
-import {
-	QueryCache,
-	QueryClient,
-	QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type ReactNode, Suspense, useState } from "react";
 
 export function ProvideReactQuery({ children }: { children: ReactNode }) {
