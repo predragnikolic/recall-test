@@ -1,14 +1,13 @@
-
 .app-grid {
   height: 100vh;
   display: grid;
   grid-template-areas: "sidebar main";
   grid-template-columns: auto 1fr;
-  background: linear-gradient(to top,#eee, #fafafa);
+  background: linear-gradient(to top, #eee, #fafafa);
 }
 
 .dark .app-grid {
-  background: linear-gradient(to top,#222, #111);
+  background: linear-gradient(to top, #222, #111);
   color: #eee;
 }
 

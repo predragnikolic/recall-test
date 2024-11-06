@@ -44,10 +44,7 @@ export function useQueryParam<Ret extends string>(
   return [value, setValue] as [Ret | null, (newQuery: NewQuery<unknown>) => void]
 }
 
-export function useBooleanQueryParam(
-  key: string,
-  navigateOpts?: NavigateOptions,
-): [boolean, (newQuery: NewQuery<boolean>) => void] {
+export function useBooleanQueryParam(key: string, navigateOpts?: NavigateOptions): [boolean, (newQuery: NewQuery<boolean>) => void] {
   const [query, setQuery] = useQueryParam(key, navigateOpts)
   const value = useMemo(() => {
     // `?query=true`
@@ -60,10 +57,7 @@ export function useBooleanQueryParam(
   return [value, setQuery]
 }
 
-export function useArrayQueryParam(
-  key: string,
-  navigateOpts?: NavigateOptions,
-): [string[], (newQuery: NewQuery<unknown[]>) => void] {
+export function useArrayQueryParam(key: string, navigateOpts?: NavigateOptions): [string[], (newQuery: NewQuery<unknown[]>) => void] {
   const [query, setQuery] = useQueryParam(key, navigateOpts)
 
   const value = useMemo(() => {

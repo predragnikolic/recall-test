@@ -1,6 +1,6 @@
 import { Button, Card, CardBody, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Tooltip } from "@nextui-org/react"
 
-export const BOOK_STATUSES = ["available", "hidden"] as const;
+export const BOOK_STATUSES = ["available", "hidden"] as const
 export type BookStatus = (typeof BOOK_STATUSES)[number]
 
 export const bookStatusToLabel: Record<

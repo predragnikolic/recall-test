@@ -11,11 +11,9 @@ export function useZodForm<
 >({
   schema,
   ...props
-}: NoInfer<UseFormProps<TFieldValues, TContext>> & { schema: ZS }): UseFormReturn<
-  TFieldValues,
-  TContext,
-  TTransformedValues
-> {
+}: NoInfer<UseFormProps<TFieldValues, TContext>> & {
+  schema: ZS
+}): UseFormReturn<TFieldValues, TContext, TTransformedValues> {
   return useForm({
     resolver: zodResolver(schema),
     ...props,
