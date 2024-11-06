@@ -6,6 +6,7 @@ import { publicRouter } from "./endpoints/public.js"
 import { booksRouter } from "./endpoints/books.js"
 import { logger } from "hono/logger"
 import { appLogger } from "./utils/logger.js"
+import { hc } from "hono/client"
 
 const app = new Hono()
   .use(logger(appLogger))
@@ -40,3 +41,9 @@ serve({
 // eslint-disable-next-line no-console
 console.log(`Server is running on http://localhost:${port}`)
 export type AppType = typeof app
+
+export const honoClient = hc<AppType>(`http://localhost:${port}`, {
+  init: {
+    credentials: "include",
+  },
+})
