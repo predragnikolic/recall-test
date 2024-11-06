@@ -1,6 +1,8 @@
 # Getting started
 
-Clone this ```
+Clone this:
+
+```
 git clone git@github.com:predragnikolic/recall-test.git
 cd recall-test
 npm install
